@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FreelanceOS
 
-## Getting Started
+FreelanceOS is a personal, self-hosted workspace for tracking freelance opportunities and managing invoices. It intentionally stays small: no accounts, teams, permissions, or generic CRM features.
 
-First, run the development server:
+The application is currently at the shared-foundation stage. Pipeline will be implemented first, followed by invoices and deductible expenses.
+
+## Stack
+
+- Next.js 16 App Router and TypeScript
+- PostgreSQL and Drizzle ORM
+- Tailwind CSS 4 with shadcn/ui-style primitives
+- Docker and Docker Compose
+
+## Local development
+
+Requirements: Node.js 20.9 or newer, pnpm 11, and Docker.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+cp .env.example .env.local
+docker compose up -d db
+pnpm install
+pnpm db:check
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). Run `pnpm verify` before handing off changes.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Purpose |
+| --- | --- |
+| `DATABASE_URL` | Server-only PostgreSQL connection URL |
 
-## Learn More
+Real `.env*` files are ignored. Keep `.env.example` updated with non-secret examples.
 
-To learn more about Next.js, take a look at the following resources:
+## Database migrations
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Schema modules live in `db/schema/` and are exported by `db/schema/index.ts`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+pnpm db:generate  # create a migration after a schema change
+pnpm db:migrate   # apply committed migrations
+pnpm db:studio    # inspect the local database
+```
 
-## Deploy on Vercel
+Generated migrations belong in `drizzle/` and should be committed.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Docker deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+docker compose up --build -d
+```
+
+The production image uses Next.js standalone output. Put a reverse proxy in front of the application when exposing it publicly and replace the Compose database credentials for deployment.
+
+## Invoice PDFs
+
+The invoice module is not implemented yet. It will render PDFs directly from persisted invoice data and regenerate them for every download; it will not depend on Google Sheets. Issuer details and a signature asset will be configurable within the application.

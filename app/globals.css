@@ -1,26 +1,76 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #10100f;
+  --foreground: #f1ede6;
+  --surface: #151513;
+  --surface-raised: #1a1a17;
+  --muted: #211f1c;
+  --muted-foreground: #969088;
+  --border: #2c2925;
+  --input: #34302b;
+  --primary: #a7f3dc;
+  --primary-foreground: #10231d;
+  --secondary: #24211e;
+  --secondary-foreground: #e8e1d8;
+  --accent: #2b302b;
+  --accent-foreground: #c5f6e6;
+  --peach: #efb78d;
+  --success: #78c69d;
+  --warning: #d9a45f;
+  --destructive: #dc776f;
+  --ring: #75cdb5;
+  --radius: 0.375rem;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-peach: var(--peach);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-destructive: var(--destructive);
+  --color-ring: var(--ring);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--border);
+}
+
+html {
+  background: var(--background);
 }
 
 body {
-  background: var(--background);
+  min-width: 320px;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  outline-color: var(--ring);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--primary) 25%, transparent);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
