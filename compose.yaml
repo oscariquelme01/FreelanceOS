@@ -20,6 +20,7 @@ services:
     build: .
     environment:
       DATABASE_URL: postgres://freelanceos:freelanceos@db:5432/freelanceos
+      STORAGE_PATH: /app/storage
       HOSTNAME: 0.0.0.0
       PORT: 3000
     ports:
@@ -27,7 +28,23 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    volumes:
+      - app_storage:/app/storage
     restart: unless-stopped
+
+  migrate:
+    build:
+      context: .
+      target: migrator
+    environment:
+      DATABASE_URL: postgres://freelanceos:freelanceos@db:5432/freelanceos
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
 
 volumes:
   postgres_data:
+  app_storage:

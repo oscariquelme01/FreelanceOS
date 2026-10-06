@@ -2,7 +2,7 @@
 
 FreelanceOS is a personal, self-hosted workspace for tracking freelance opportunities and managing invoices. It intentionally stays small: no accounts, teams, permissions, or generic CRM features.
 
-The application is currently at the shared-foundation stage. Pipeline will be implemented first, followed by invoices and deductible expenses.
+The invoice workspace includes clients, billing details, invoice calculations and PDFs, plus deductible expense uploads. Pipeline remains a separate placeholder for its later feature slice.
 
 ## Stack
 
@@ -20,6 +20,8 @@ cp .env.example .env.local
 docker compose up -d db
 pnpm install
 pnpm db:check
+pnpm db:migrate
+pnpm db:seed
 pnpm dev
 ```
 
@@ -45,14 +47,16 @@ pnpm db:studio    # inspect the local database
 
 Generated migrations belong in `drizzle/` and should be committed.
 
+`pnpm db:seed` idempotently adds a fictional billing profile, three clients, and tops the demo dataset up to 15 invoices covering domestic, EU, and non-EU defaults.
+
 ## Docker deployment
 
 ```bash
 docker compose up --build -d
 ```
 
-The production image uses Next.js standalone output. Put a reverse proxy in front of the application when exposing it publicly and replace the Compose database credentials for deployment.
+Compose waits for PostgreSQL, applies committed migrations through its one-shot `migrate` service, then starts the Next.js standalone image. Put a reverse proxy in front of the application when exposing it publicly and replace the Compose database credentials for deployment.
 
 ## Invoice PDFs
 
-The invoice module is not implemented yet. It will render PDFs directly from persisted invoice data and regenerate them for every download; it will not depend on Google Sheets. Issuer details and a signature asset will be configurable within the application.
+Invoice PDFs are rendered directly from snapshotted invoice data and regenerated for every download; there is no Google Sheets dependency. A billing-profile signature can be uploaded as PNG or JPEG. Expense documents and signatures are stored under `STORAGE_PATH` (`./storage` locally and a private Docker volume in Compose); back up that volume together with PostgreSQL.

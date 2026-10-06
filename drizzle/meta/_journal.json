@@ -1,1 +1,48 @@
-{"version":"7","dialect":"postgresql","entries":[]}
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1791284300668,
+      "tag": "0000_warm_beyonder",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791292070917,
+      "tag": "0001_freezing_blacklash",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791292220201,
+      "tag": "0002_wooden_namora",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1791292753940,
+      "tag": "0003_damp_swordsman",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1791294220503,
+      "tag": "0004_empty_whizzer",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1791297191260,
+      "tag": "0005_watery_archangel",
+      "breakpoints": true
+    }
+  ]
+}

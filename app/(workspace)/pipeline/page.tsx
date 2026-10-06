@@ -23,7 +23,7 @@ export default function PipelinePage() {
 
       <div className="flex-1 p-4 lg:p-6">
         <section className="overflow-hidden rounded-md border bg-surface" aria-label="Pipeline preview">
-          <div className="grid min-w-[720px] grid-cols-[1.2fr_1.5fr_0.8fr_0.8fr_0.7fr] border-b bg-surface-raised px-3 py-2 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+          <div className="grid min-w-[720px] grid-cols-[1.2fr_1.5fr_0.8fr_0.8fr_0.7fr] border-b bg-surface-raised px-3 py-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
             {columns.map((column) => (
               <span key={column}>{column}</span>
             ))}
