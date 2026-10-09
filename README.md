@@ -1,3 +1,6 @@
+> [!warning] This was vibecoded into oblivion!!
+> Don't judge me on this one :(
+
 # FreelanceOS
 
 FreelanceOS is a personal, self-hosted workspace for managing outbound outreach and invoices. It intentionally stays small: no accounts, teams, permissions, or generic CRM features.
