@@ -1,5 +1,5 @@
-> [!warning] This was vibecoded into oblivion!!
-> Don't judge me on this one :(
+> [!WARNING] 
+> This was vibecoded into oblivion!! Don't judge me on this one :(
 
 # FreelanceOS
 
