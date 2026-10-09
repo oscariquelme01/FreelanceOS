@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { toast } from "sonner";
 
-import { cn } from "@/lib/utils";
+import { Select } from "@/components/ui/select";
 
 const labels = {
   sent: "Sent",
@@ -27,13 +27,13 @@ export function InvoiceStatusSelect({
   const tones = { sent: "text-peach", paid: "text-success", rejected: "text-destructive" };
 
   return (
-    <select
+    <Select
       value={value}
       disabled={pending}
-      className={cn("min-w-24 font-medium", tones[value])}
-      onChange={(event) => {
+      className={`min-w-24 border-transparent bg-transparent font-medium ${tones[value]}`}
+      onValueChange={(selected) => {
         const previous = value;
-        const next = event.target.value as keyof typeof labels;
+        const next = selected as keyof typeof labels;
         setValue(next);
         startTransition(async () => {
           try {
@@ -47,10 +47,7 @@ export function InvoiceStatusSelect({
         });
       }}
       aria-label={`Status for ${number}`}
-    >
-      {Object.entries(labels).map(([option, label]) => (
-        <option value={option} key={option}>{label}</option>
-      ))}
-    </select>
+      options={Object.entries(labels).map(([option, label]) => ({ value: option, label }))}
+    />
   );
 }

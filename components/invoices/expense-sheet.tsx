@@ -4,9 +4,9 @@ import { Pencil, Plus } from "lucide-react";
 import { useState } from "react";
 
 import { createExpense, updateExpense } from "@/app/(workspace)/invoices/actions";
-import { useSheetAction } from "@/components/invoices/use-sheet-action";
 import { Button } from "@/components/ui/button";
 import { Sheet } from "@/components/ui/sheet";
+import { useSheetAction } from "@/components/ui/use-sheet-action";
 import type { expenses } from "@/db/schema";
 import { centsToInput } from "@/lib/invoices/calculations";
 

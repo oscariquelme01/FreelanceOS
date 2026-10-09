@@ -5,9 +5,9 @@ import { useState } from "react";
 
 import { createClient, updateClient } from "@/app/(workspace)/invoices/actions";
 import { ClientFields } from "@/components/invoices/client-fields";
-import { useSheetAction } from "@/components/invoices/use-sheet-action";
 import { Button } from "@/components/ui/button";
 import { Sheet } from "@/components/ui/sheet";
+import { useSheetAction } from "@/components/ui/use-sheet-action";
 import type { clients } from "@/db/schema";
 
 type Client = typeof clients.$inferSelect;

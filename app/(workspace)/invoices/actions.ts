@@ -246,6 +246,7 @@ export async function createInvoice(formData: FormData) {
     return created.id;
   });
   revalidatePath("/invoices");
+  revalidatePath("/analytics");
   return { success: true, message: "Invoice created", id: invoiceId };
 }
 
@@ -292,6 +293,7 @@ export async function updateInvoice(id: string, formData: FormData) {
     );
   });
   revalidatePath("/invoices");
+  revalidatePath("/analytics");
   return { success: true, message: "Invoice saved", id };
 }
 
@@ -302,6 +304,7 @@ export async function updateInvoiceStatus(id: string, value: string) {
     .set({ status, paidAt: status === "paid" ? new Date() : null, updatedAt: new Date() })
     .where(eq(invoices.id, id));
   revalidatePath("/invoices");
+  revalidatePath("/analytics");
 }
 
 const acceptedFiles = new Set(["application/pdf", "image/png", "image/jpeg"]);
@@ -345,6 +348,7 @@ export async function createExpense(formData: FormData) {
     throw error;
   }
   revalidatePath("/invoices");
+  revalidatePath("/analytics");
   return { success: true, message: "Expense uploaded" };
 }
 
@@ -373,6 +377,7 @@ export async function updateExpense(id: string, formData: FormData) {
     await unlink(path.join(/* turbopackIgnore: true */ storageRoot, expense.storagePath)).catch(() => undefined);
   }
   revalidatePath("/invoices");
+  revalidatePath("/analytics");
   return { success: true, message: "Expense saved" };
 }
 
@@ -383,5 +388,6 @@ export async function deleteExpense(id: string) {
   const storageRoot = process.env.STORAGE_PATH || path.join(process.cwd(), "storage");
   await unlink(path.join(/* turbopackIgnore: true */ storageRoot, expense.storagePath)).catch(() => undefined);
   revalidatePath("/invoices");
+  revalidatePath("/analytics");
   return { success: true, message: "Expense deleted" };
 }

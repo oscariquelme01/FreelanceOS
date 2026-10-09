@@ -2,15 +2,16 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BriefcaseBusiness, FileText, Menu, X } from "lucide-react";
+import { ChartNoAxesCombined, FileText, Menu, Send, X } from "lucide-react";
 import { useState, type ReactNode } from "react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const navigation = [
-  { href: "/pipeline", label: "Pipeline", icon: BriefcaseBusiness },
+  { href: "/outreach", label: "Outreach", icon: Send },
   { href: "/invoices", label: "Invoices", icon: FileText },
+  { href: "/analytics", label: "Analytics", icon: ChartNoAxesCombined },
 ];
 
 function Sidebar({ onNavigate }: { onNavigate?: () => void }) {

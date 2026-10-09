@@ -43,6 +43,20 @@
       "when": 1791297191260,
       "tag": "0005_watery_archangel",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1791298799189,
+      "tag": "0006_mysterious_the_spike",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1791319053139,
+      "tag": "0007_new_magneto",
+      "breakpoints": true
     }
   ]
 }

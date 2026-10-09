@@ -5,6 +5,7 @@ import { useMemo, useState, useTransition, type FormEvent } from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
+import { Select } from "@/components/ui/select";
 import { calculateInvoice, formatMoney } from "@/lib/invoices/calculations";
 
 export type InvoiceEditorClient = {
@@ -94,13 +95,11 @@ export function InvoiceEditor({
       <section className="space-y-5">
         <div className="grid gap-3 rounded-md border bg-surface p-4 sm:grid-cols-2 lg:grid-cols-4">
           <label className="field sm:col-span-2">Client
-            <select name="clientId" value={clientId} onChange={(event) => selectClient(event.target.value)} required>
-              {clients.map((client) => <option key={client.id} value={client.id}>{client.name}</option>)}
-            </select>
+            <Select name="clientId" value={clientId} onValueChange={selectClient} options={clients.map((client) => ({ value: client.id, label: client.name }))} required />
           </label>
           <label className="field sm:col-span-2 lg:col-span-1">Issue date<input name="issueDate" type="date" required defaultValue={initial?.issueDate ?? new Date().toISOString().slice(0, 10)} /></label>
-          <label className="field">Currency<select name="currency" value={currency} onChange={(event) => setCurrency(event.target.value as "EUR" | "USD")}><option>EUR</option><option>USD</option></select></label>
-          <label className="field">PDF language<select name="language" value={language} onChange={(event) => setLanguage(event.target.value as "es" | "en")}><option value="es">Español</option><option value="en">English</option></select></label>
+          <label className="field">Currency<Select name="currency" value={currency} onValueChange={(value) => setCurrency(value as "EUR" | "USD")} options={[{ value: "EUR", label: "EUR" }, { value: "USD", label: "USD" }]} /></label>
+          <label className="field">PDF language<Select name="language" value={language} onValueChange={(value) => setLanguage(value as "es" | "en")} options={[{ value: "es", label: "Español" }, { value: "en", label: "English" }]} /></label>
         </div>
 
         <div className="overflow-hidden rounded-md border bg-surface">

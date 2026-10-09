@@ -4,9 +4,9 @@ import { Pencil } from "lucide-react";
 import { useState } from "react";
 
 import { saveBillingProfile } from "@/app/(workspace)/invoices/actions";
-import { useSheetAction } from "@/components/invoices/use-sheet-action";
 import { Button } from "@/components/ui/button";
 import { Sheet } from "@/components/ui/sheet";
+import { useSheetAction } from "@/components/ui/use-sheet-action";
 import type { billingProfiles } from "@/db/schema";
 
 type Profile = typeof billingProfiles.$inferSelect;

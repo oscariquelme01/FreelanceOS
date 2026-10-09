@@ -13,6 +13,8 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 
+export * from "@/db/schema/outreach";
+
 export const invoiceStatusEnum = pgEnum("invoice_status", [
   "sent",
   "paid",

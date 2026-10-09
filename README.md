@@ -1,8 +1,8 @@
 # FreelanceOS
 
-FreelanceOS is a personal, self-hosted workspace for tracking freelance opportunities and managing invoices. It intentionally stays small: no accounts, teams, permissions, or generic CRM features.
+FreelanceOS is a personal, self-hosted workspace for managing outbound outreach and invoices. It intentionally stays small: no accounts, teams, permissions, or generic CRM features.
 
-The invoice workspace includes clients, billing details, invoice calculations and PDFs, plus deductible expense uploads. Pipeline remains a separate placeholder for its later feature slice.
+Outreach tracks companies, roles, contacts, statuses, and follow-ups in a dense table. The invoice workspace includes clients, billing details, invoice calculations and PDFs, plus deductible expense uploads.
 
 ## Stack
 
@@ -47,7 +47,7 @@ pnpm db:studio    # inspect the local database
 
 Generated migrations belong in `drizzle/` and should be committed.
 
-`pnpm db:seed` idempotently adds a fictional billing profile, three clients, and tops the demo dataset up to 15 invoices covering domestic, EU, and non-EU defaults.
+`pnpm db:seed` idempotently adds a fictional billing profile, three clients, 15 invoices, and outreach opportunities covering every workflow status.
 
 ## Docker deployment
 
