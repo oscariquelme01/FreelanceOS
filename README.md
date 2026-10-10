@@ -20,7 +20,7 @@ Requirements: Node.js 20.9 or newer, pnpm 11, and Docker.
 
 ```bash
 cp .env.example .env.local
-docker compose up -d db
+docker compose -f compose.yaml -f compose.dev.yaml up -d db
 pnpm install
 pnpm db:check
 pnpm db:migrate
@@ -35,6 +35,8 @@ Open [http://localhost:3000](http://localhost:3000). Run `pnpm verify` before ha
 | Variable | Purpose |
 | --- | --- |
 | `DATABASE_URL` | Server-only PostgreSQL connection URL |
+| `STORAGE_PATH` | Directory for uploaded expense documents and signatures |
+| `APP_PORT` | Docker host port for the application (defaults to `3000`; container port stays `3000`) |
 
 Real `.env*` files are ignored. Keep `.env.example` updated with non-secret examples.
 
@@ -54,11 +56,17 @@ Generated migrations belong in `drizzle/` and should be committed.
 
 ## Docker deployment
 
+Create `.env` on the server from `.env.example` if it does not already exist, then set `APP_PORT` to a free host port, for example `APP_PORT=3080`. Docker Compose reads `.env` automatically; `.env.local` is for local Next.js development.
+
 ```bash
+cp .env.example .env # first setup only; do not overwrite an existing .env
+# Edit APP_PORT in .env before starting.
 docker compose up --build -d
 ```
 
-Compose waits for PostgreSQL, applies committed migrations through its one-shot `migrate` service, then starts the Next.js standalone image. Put a reverse proxy in front of the application when exposing it publicly and replace the Compose database credentials for deployment.
+Compose waits for PostgreSQL, applies committed migrations through its one-shot `migrate` service, then starts the Next.js standalone image. PostgreSQL is only accessible inside the Compose network; the development override publishes it on localhost when needed. Compose supplies the container database connection and storage path directly, independently of those values in `.env`.
+
+Point your existing Caddy reverse proxy at the configured host port (for example, `reverse_proxy 127.0.0.1:3080` if Caddy runs on the host). If Caddy runs in a container, use a reachable host address instead of that container's localhost. Keep access restricted to your Tailscale network: the app has no login, and the published app port listens on all host interfaces. No Tailscale Serve or additional reverse proxy is required.
 
 ## Invoice PDFs
 
